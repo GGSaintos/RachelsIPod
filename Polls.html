@@ -72,8 +72,16 @@
   </div>
 
   <div class="container">
+    <br>
+    <button onclick="toggleWeeklyAudio()">🔊 Mute/Unmute Song</button>
+
+    <audio id="polls-audio" autoplay loop>
+    <source src="weeklymusic/Baby.wav" type="audio/wav">    
+    </audio>
+
     <h1>Hello my love 💕 please vote below</h1>
-    <h2>Which photo should I use for my phone lock screen?</h2>
+    <h1>Which photo should I use for my phone lock screen?</h1>
+    <h3>Also this is a test storage so screenshot and send in the RayGil album pls 🥺<h3></h3>
 
     <form id="pollForm">
       <div class="image-block">
@@ -111,6 +119,13 @@
 </div>
 
 <script>
+
+  function toggleWeeklyAudio() {
+    const audio = document.getElementById("polls-audio");
+    if (audio) {
+      audio.muted = !audio.muted;
+    }
+  }
   const form = document.getElementById('pollForm');
   const resultText = document.getElementById('resultText');
 
@@ -134,8 +149,13 @@
     } else {
       resultText.textContent = 'Please select an image before submitting.';
     }
+
+
+
+
   });
 </script>
+
 
 </body>
 </html>

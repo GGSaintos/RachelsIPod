@@ -62,7 +62,14 @@
     <a class = "Letter" href = "Weekly.html">Weekly NewsLetter</a>
     <a class = "Polls" href = "Polls.html">Polls</a>
     <!-- <a class = "Logout" href = "/logout">Logout</a> -->
+
+
   </div>
+    <br>
+    <button onclick="toggleWeeklyAudio()">🔊 Mute/Unmute Song</button>
+    <audio id="weekly-audio" autoplay loop>
+    <source src="weeklymusic/jazz.wav" type="audio/wav">    
+    </audio>
     <div class="w3-container w3-darkgreen">
         <h1>RayGil Weekly News Letter</h1>
     </div>
@@ -193,6 +200,16 @@
     <h1>Tune in next week for more updates on RayGil's Adventures! 
 </h1>
 </body>
+
+<script>
+  function toggleWeeklyAudio() {
+    const audio = document.getElementById("weekly-audio");
+    if (audio) {
+      audio.muted = !audio.muted;
+    }
+  }
+</script>
+
 </html>
 
 
