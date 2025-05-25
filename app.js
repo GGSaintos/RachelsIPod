@@ -27,6 +27,14 @@ function isAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
+app.get('/', (req, res) => {
+  if (req.session && req.session.authenticated) {
+    res.redirect('/index.html');
+  } else {
+    res.redirect('/login');
+  }
+});
+
 // Login routes
 app.get('/login', (req, res) => {
   res.render('login', { error: null });
