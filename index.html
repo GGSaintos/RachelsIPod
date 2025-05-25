@@ -20,7 +20,10 @@
 
     .ipod-container {
       position: relative;
-      width: 500px;
+      width: 200%;
+      top: 150px;
+      height: 0;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -33,13 +36,14 @@
 
     #album-cover {
         position: absolute;
-        top: 58px;
-        left: 58px;
-        translate: 32.5% 16.5%;
-        width: 245px;
-        height: 165px;
+        top: 170px;
+        left: 275px;
+        width: 49%;
+        height: 335px;
         object-fit: cover;
         pointer-events: none;
+        border-radius: 10px;
+        border-color: 2px solid #000;
         }
 
     .controls {
@@ -56,28 +60,32 @@
     .next-visible-button {
       font-size: 18px;
       padding: 12px 24px;
-      background-color:transparent;
+      background-color: transparent;
       color:transparent;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       position: relative;
-      top: -220px;
-      left: 75px;
+      top: 710px;
+      left: 140px;
+      width: 100px;
+      height: 110px;
       transition: background-color 0.3s ease;
     }
 
     .back-visible-button {
       font-size: 18px;
       padding: 12px 24px;
-      background-color:transparent;
+      background-color: transparent;
       color: transparent;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       position: relative;
-      top: -298px;
-      left: -75px;
+      top: 575px;
+      left: -90px;
+      height: 100px;
+      width: 100px;
       transition: background-color 0.3s ease;
     }
 
@@ -90,7 +98,10 @@
       border-radius: 8px;
       cursor: pointer;
       position: relative;
-      top: -320px;
+      width: 10%;
+      height: 100px;
+      top: 525px;
+      left: 20px;
       transition: background-color 0.3s;
     }
 
@@ -123,8 +134,10 @@
 
     .menu-button {
       position: relative;
-      top: -430px; 
-      left: 7px;
+      top: 250px;
+      left: 25px;
+      width: 10%;
+      height: 100px;
       padding: 10px 20px;
       background-color:transparent;
       color: transparent;
@@ -134,9 +147,9 @@
       z-index: 5;
     }
 
-    /* Popup styles */
+
 .popup-overlay {
-  display: none; /* hidden by default */
+  display: none; 
   position: fixed;
   top: 0;
   left: 0;
@@ -175,20 +188,120 @@
     #playPauseBtn { left: 705px; top: 630px; }
     #nextBtn      { left: 768px; top: 581px; }
     #prevBtn      { left: 631px; top: 581px; }
+    .popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
+.popup-content {
+  position: relative;
+  background: transparent;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#popup-message-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  image-rendering: pixelated;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: red;
+  color: white;
+  border: none;
+  font-size: 16px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.topnav{
+  background-color: #333;
+  overflow:hidden;
+}
+
+/* Style the links inside the navigation bar 
+*/
+.topnav a{
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a.hover{
+  background-color: #ddd;
+  color:black;
+}
+
+.topnav a.active{
+  background-color: rgb(20, 78, 20);
+  color: white;
+}
+
+#volumeBtn {
+  font-size: 18px;
+  position: relative;
+  top: -600px;
+  left: 315px;
+  height: 50px;
+  width: 50px;
+  border: black 2px solid;
+  border-radius: 0px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 10px;
+}  
+
+#volumeSlider{
+  position: absolute;
+  top: 275px;
+  left: 710px;
+  width: 200px;
+  rotate: -90deg;
+  z-index: 10;
+  background: white;
+  accent-color: white;
+  border-radius: 10px;
+}
   </style>
 </head>
 <body>
+  <div class = "topnav">
+    <a class = "active" href = "index.html">Home</a>
+    <a class = "Letter" href = "Weekly.html">Weekly NewsLetter</a>
+    <a class = "Polls" href = "Polls.html">Polls</a>
+  </div>
 
-  <h1>  </h1>
-
+  </div>
   <div class="ipod-container">
     <img src="ipods.png" alt="Pixel iPod" class="ipod">
     <img id="album-cover" src="">
+    <button id="volumeBtn" onclick="toggleMute()">🔊</button>
+    <input
+    type="range"
+    id="volumeSlider"
+    min="0"
+    max="1"
+    step="0.01"
+    value="1"
+    oninput="setVolume(this.value)"
+  >
   </div>
   <br>
   <br>
-  <div>
+  <!-- <div>
     Dear Rai Rai,
   <br>
     Thank you for being the best friend that I'd want for eternity.
@@ -212,10 +325,7 @@
   The Phil Dunphy to your Claire 
   <br>
   Gilir 
- 
-
-    
-  </div>
+  -->
 
   <button class="screen-button" id="playPauseBtn" onclick="togglePlay()"></button>
   <button class="screen-button" id="nextBtn" onclick="nextTrack()"></button>
@@ -240,9 +350,16 @@
   <audio id="audio-player" style="display:none;"></audio>
   </div>
 
-  <!-- <div id="message-container">
-  <img id="message-img" src="" alt="Message Image">
-  </div> -->
+<!-- Button to trigger the popup -->
+<!-- <button onclick="showMessageImage()">💌 Read Message</button> -->
+
+<!-- Popup container -->
+<div id="image-popup" class="popup-overlay">
+  <div class="popup-content">
+    <button class="close-button" onclick="closeImagePopup()">✖</button>
+    <img src="A_pixel_art_digital_text_message_addressed_to_Rai_.png" alt="Message Image" id="popup-message-img">
+  </div>
+</div>
 
 
 
@@ -258,7 +375,7 @@
 
 
   <script>
-    const maxIndex = 9;
+    const maxIndex = 10;
     let trackList = Array.from({ length: maxIndex }, (_, i) => i + 1);
 
 
@@ -340,6 +457,29 @@ function openMenu() {
     }
 
     window.onload = () => loadTrack(currentShuffledIndex);
+  function toggleMute() {
+    const audio = document.getElementById("audio-player");
+    const volumeBtn = document.getElementById("volumeBtn");
+
+    if (audio.muted) {
+      audio.muted = false;
+      volumeBtn.textContent = "🔊"; 
+    } else {
+      audio.muted = true;
+      volumeBtn.textContent = "🔇"; 
+    }
+  }
+
+  function setVolume(value) {
+    const audio = document.getElementById("audio-player");
+    if (audio) {
+      audio.volume = value;
+      console.log("Volume set to:", value); 
+    } else {
+      console.log("Audio element not found!");
+    }
+  }
+
   </script>
 
 </body>

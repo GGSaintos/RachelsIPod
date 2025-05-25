@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Polls Page</title>
+  <style>
+    body {
+      background-color: #fff7c9;
+      font-family: monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .topnav {
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    .topnav a {
+      float: left;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .topnav a.active {
+      background-color: rgb(20, 78, 20);
+      color: white;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .image-block {
+      margin: 20px auto;
+      display: inline-block;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="topnav">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <a class="active" href="index.html">Home</a>
+    <a href="Weekly.html">Weekly NewsLetter</a>
+    <a href="Polls.html">Polls</a>
+  </div>
+
+  <div class="container">
+    <h1>Hello my love 💕 please vote below</h1>
+    <h2>Which photo should I use for my phone lock screen?</h2>
+
+    <form id="pollForm">
+      <div class="image-block">
+        <label>
+          <img src="Wallpapers/1.JPG" width="300" height="400" alt="Image 1"><br>
+          <input type="radio" name="vote" value="Image 1"> Vote for Image 1
+        </label>
+      </div>
+
+      <div class="image-block">
+        <label>
+          <img src="Wallpapers/2.JPG" width="300" height="400" alt="Image 2"><br>
+          <input type="radio" name="vote" value="Image 2"> Vote for Image 2
+        </label>
+      </div>
+
+      <div class="image-block">
+        <label>
+          <img src="Wallpapers/3.JPG" width="300" height="400" alt="Image 3"><br>
+          <input type="radio" name="vote" value="Image 3"> Vote for Image 3
+        </label>
+      </div>
+
+      <div class="image-block">
+        <label>
+          <img src="Wallpapers/4.JPG" width="300" height="400" alt="Image 4"><br>
+          <input type="radio" name="vote" value="Image 4"> Vote for Image 4
+        </label>
+      </div>
+      <br>
+    <button type="submit">Submit Vote</button>
+  </form>
+
+  <div class="result" id="resultText"></div>
+</div>
+
+<script>
+  const form = document.getElementById('pollForm');
+  const resultText = document.getElementById('resultText');
+
+  // Load the last vote from any user (even if different browser tab or time)
+  window.onload = () => {
+    const lastVote = localStorage.getItem('lastVoteGlobal');
+    if (lastVote) {
+      const selectedRadio = document.querySelector(`input[value="${lastVote}"]`);
+      if (selectedRadio) selectedRadio.checked = true;
+      resultText.textContent = `Last selected image: ${lastVote}`;
+    }
+  };
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const choice = document.querySelector('input[name="vote"]:checked');
+    if (choice) {
+      // Save for future users (globally)
+      localStorage.setItem('lastVoteGlobal', choice.value);
+      resultText.textContent = `You selected: ${choice.value} — future visitors will see this pre-selected!`;
+    } else {
+      resultText.textContent = 'Please select an image before submitting.';
+    }
+  });
+</script>
+
+</body>
+</html>
